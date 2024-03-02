@@ -1,19 +1,18 @@
 // Nav.js
 import React, { useRef, useState, useEffect } from 'react';
-import NepaliDate from 'nepali-date-converter';
+
 
 const Nav = ({ setLanguage }) => {
   const dropdownRef = useRef(null);
   const [isDropdownOpen2, setIsDropdownOpen2] = useState(false);
-  const [language, setNavLanguage] = useState('en'); // Default language is English
-
+  
   const toggleDropdown2 = () => {
     setIsDropdownOpen2(!isDropdownOpen2);
   };
 
   const handleLanguageChange = (language) => {
     setLanguage(language);
-    setNavLanguage(language);
+ 
     setIsDropdownOpen2(false);
   };
 
@@ -31,10 +30,7 @@ const Nav = ({ setLanguage }) => {
     };
   }, [dropdownRef]);
 
-  const formatNepaliDate = (date) => {
-    const nepaliDate = new NepaliDate(date);
-    return `${nepaliDate.format("MMMM")} ${nepaliDate.getDate()}, ${nepaliDate.getYear()}`;
-  };
+ 
 
   return (
     <div>
@@ -59,8 +55,7 @@ const Nav = ({ setLanguage }) => {
         </div>
       </div>
 
-      {/* Display the date based on the selected language */}
-      {language === 'ne' ? formatNepaliDate(new Date()) : new Date().toLocaleDateString('en-US')}
+
     </div>
   );
 };
