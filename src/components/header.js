@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import NepaliDate from 'nepali-date-converter';
 
-const Header = ({ language }) => {
+const Header = ({ lang }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const Header = ({ language }) => {
   }, []);
 
   const formatDate = (date) => {
-    if (language === 'ne') {
+    if (lang === 'नेपा') {
       const nepaliDate = new NepaliDate(date);
       return `${nepaliDate.format("MMMM")} ${nepaliDate.getDate()}, ${nepaliDate.getYear()}`;
     } else {

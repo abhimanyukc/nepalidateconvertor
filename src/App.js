@@ -5,13 +5,16 @@ import Nav from './components/nav';
 import React, { useState, useEffect} from 'react'
 import { format } from 'date-fns';
 function App() {
-  const [language, setLanguage] = useState('en');
+  const storedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+  const [lang, setLanguage] = useState(storedLanguage);
+
+
+  const storedTimeFormat = localStorage.getItem('selectedTimeFormat') || 'en';
+  const [timeFormat, setTimeFormat] = useState(storedTimeFormat);
 
   const formatDate = (date) => {
-    // Add logic to format the date based on the selected language
-    // For simplicity, let's assume 'en' for English and 'ne' for Nepali
-    if (language === 'ne') {
-      // You should implement the Nepali date formatting logic here
+    if (timeFormat === 'नेपा') {
+      // Implement Nepali date formatting logic here
       // For now, just return the English format
       return format(date, 'MMM d, yyyy');
     } else {
@@ -19,14 +22,20 @@ function App() {
     }
   };
 
-  return (
+
+  useEffect(() => {
+    localStorage.setItem('selectedLanguage', lang);
+    localStorage.setItem('selectedTimeFormat', timeFormat);
+  }, [lang, timeFormat]);
+
+
+ return (
     <div>
-     <div>
-      <Header language={language} />
-      <Nav setLanguage={setLanguage} />
-    </div>
+      <Header lang={lang} timeFormat={timeFormat} />
+      <Nav setLanguage={setLanguage} setTimeFormat={setTimeFormat} />
     </div>
   );
 }
+
 
 export default App;
